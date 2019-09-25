@@ -20,12 +20,17 @@ socket.emit('new-user', name)
 
 //whenever a message is sent, run this function
 socket.on('chat-message', data => {
-    appendMessage(data)
+    appendMessage(`${data.name}: ${data.message}`)
 })
 
 //whenever a new user joins, run this
 socket.on('user-connected', name => {
     appendMessage(`${name} connected`)
+})
+
+//whenever a user leaves chat, do this
+socket.on('user-disconnected', name => {
+    appendMessage(`${name} disconnected`)
 })
 
 //listening to form
@@ -37,4 +42,7 @@ messageForm.addEventListener('submit', e => {
     socket.emit('send-chat-message', message)
     //clears message form
     messageInput.value=''
+    //adds the users message to his own chat
+    appendMessage(`You: ${message}`)
+
 })
