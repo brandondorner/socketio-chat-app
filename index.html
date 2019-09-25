@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chat App</title>
     <link rel="stylesheet" href="./css/index.css">
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="messages-container">
+    <div id="messages-container">
         user: hello
     </div>
-    <div class="form-container">
-        <form id="text-form">
-            <input type="text" placeholder="Enter Message">
-            <button type="submit">Send</button>
-        </form>
-    </div>
+    <form id="text-form">
+        <input type="text" placeholder="Enter Message" id="message-input">
+        <button type="submit" >Send</button>
+    </form>
 </body>
 </html>
