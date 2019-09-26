@@ -1,4 +1,33 @@
-const io = require('socket.io')(3000)
+//creating express server that can communicate with socket.io
+const express = require('express')
+const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
+//set up express server
+app.set('views', './views' )
+//telling server to use ejs
+app.set('view engine', 'ejs')
+//telling server js files will be in public folder
+app.use(express.static('public'))
+//ablity to accept url parameters
+app.use(express.urlencoded({ extended: true}))
+
+//zero rooms to start
+const rooms = {} 
+
+//routes
+//at route index, render inex file as well as rooms
+app.get('/', (req, res) => {
+    res.render('index', { rooms : rooms})
+})
+
+//when given the url parameter of room, render the room file and store the room parameter in the roomName variable
+app.get('/:room', (req, res) => {
+    res.render('room', { roomName: req.params.room})
+})
+
+server.listen(3000)
 
 const users = {}
 
