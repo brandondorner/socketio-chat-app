@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="../public/css/index.css" type="text/css">
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    
+    <div id="room-container">
+        <!-- For each room of rooms (server.js), render a div w/ a tag -->
+        <% Object.keys(rooms).forEach(room => { %>
+            <div><%= room %></div>
+            <a href="/<%= room %>">Join</a>
+        <% }) %>
+        <!-- New room form, submits data to webpage/room -->
+          <form action="/room" method="POST">
+            <input name="new-room" type="text" required>
+            <button type="submit">New Room</button>
+          </form>          
+    </div>
+</body>
+</html>
