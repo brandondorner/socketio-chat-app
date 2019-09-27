@@ -24,18 +24,24 @@ app.get('/', (req, res) => {
 
 app.post('/room', (req, res) => {
     //if new room already exists, redirect to index
-    if (rooms[req.body.new-room] != null){
+    if (rooms[req.body.newRoom] != null){
         return res.redirect('/')
     }
+    //adds new-room to rooms object
     //add an empty list of users to the newly created room key. then redirect to page
-    rooms[req.body.new-room] = { users: {} }
-    res.redirect(req.body.new-room)
+    rooms[req.body.newRoom] = { users: {} }
+    res.redirect(req.body.newRoom)
     //send message that new room was created to other users
+    io.emit('room-created', req.body.newRoom)
 })
 
 //when given the url parameter of room, render the room file
 //and store the room parameter in the roomName variable
 app.get('/:room', (req, res) => {
+    //if room doesn't exist, redirect to homepage
+    if (rooms[req.params.room] == null) {
+        return res.redirect('/')
+    }
     res.render('room', { roomName: req.params.room})
 })
 

@@ -5,6 +5,12 @@ const messageForm = document.getElementById('text-form')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.getElementById('message-container')
 
+//takes incoming message and creates a new div with message text
+const appendMessage = (message) => {
+    const messageElement = document.createElement('div')
+    messageElement.innerText = message
+    messageContainer.append(messageElement)
+}
 
 if (messageForm != null){
     //Get username and join lobby, send username to other users
@@ -14,28 +20,22 @@ if (messageForm != null){
 
     //listening to form
     messageForm.addEventListener('submit', e => {
-    e.preventDefault()
-    //grabbing input value
-    const message = messageInput.value
-    //send info from client to server
-    socket.emit('send-chat-message', message)
-    //clears message form
-    messageInput.value=''
-    //adds the users message to his own chat
-    appendMessage(`You: ${message}`)
+        e.preventDefault()
+        //grabbing input value 
+        const message = messageInput.value
+        //send info from client to server
+        socket.emit('send-chat-message', message)
+        //clears message form
+        messageInput.value=''
+        //adds the users message to his own chat
+        appendMessage(`You: ${message}`)
 
 })
 }
 
-
-//takes incoming message and creates a new div with message text
-const appendMessage = (message) => {
-    const messageElement = document.createElement('div')
-    messageElement.innerText = message
-    messageContainer.append(messageElement)
-}
-
-
+socket.on('room-created', newRoom => {
+    
+})
 
 //whenever a message is sent, run this function
 socket.on('chat-message', data => {
