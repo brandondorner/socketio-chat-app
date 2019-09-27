@@ -14,7 +14,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true}))
 
 //zero rooms to start
-const rooms = {} 
+const rooms = { room1: {}} 
 
 //routes
 //at route index, render inex file as well as rooms
@@ -22,7 +22,19 @@ app.get('/', (req, res) => {
     res.render('index', { rooms : rooms})
 })
 
-//when given the url parameter of room, render the room file and store the room parameter in the roomName variable
+app.post('/room', (req, res) => {
+    //if new room already exists, redirect to index
+    if (rooms[req.body.new-room] != null){
+        return res.redirect('/')
+    }
+    //add an empty list of users to the newly created room key. then redirect to page
+    rooms[req.body.new-room] = { users: {} }
+    res.redirect(req.body.new-room)
+    //send message that new room was created to other users
+})
+
+//when given the url parameter of room, render the room file
+//and store the room parameter in the roomName variable
 app.get('/:room', (req, res) => {
     res.render('room', { roomName: req.params.room})
 })
