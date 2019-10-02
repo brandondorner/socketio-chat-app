@@ -10,12 +10,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  display: none;
 }
 
 body .main-container {
   width: 70%;
-  border: black solid 1px;
 }
 
 body .main-container #message-container div {
@@ -47,5 +45,9 @@ body .main-container form input {
 
 body .main-container form button {
   width: 20%;
+}
+
+body .chatroom-box {
+  width: 50%;
 }
 /*# sourceMappingURL=index.css.map */

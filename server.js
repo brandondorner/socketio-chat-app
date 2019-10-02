@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/room', (req, res) => {
-    console.log(req)
     //if new room already exists, redirect to index
     if (rooms[req.body.room] != null){
         return res.redirect('/')
@@ -55,13 +54,10 @@ io.on('connection', socket => {
     //when server receives new user, do this
     socket.on('new-user', (room, name) => {
         //join a room then
-        console.log(room, 'r2')
         socket.join(room)
-        //access roomName out of rooms var, then grab the users from that room and assign the specific user the inputed name
-        console.log(rooms)
-        console.log(name)
+        //access room out of rooms var, then grab the users from that room and assign the specific user inputed name
         rooms[room].users[socket.id] = name
-        //broadcast user (name) has connected to all other users in param 'roomName'
+        //broadcast user (name) has connected to all other users in param 'room'
         socket.to(room).broadcast.emit('user-connected', name)
     })
 
@@ -87,7 +83,6 @@ const getUserRooms = (socket) => {
     //roomName, room is the key value pair for rooms. names is the accumulator
     return Object.entries(rooms).reduce((names, [roomName, room]) => {
         //if user exists, push name of the room to names (list of all room names)
-        console.log('getuserrooms', rooms)
         if (room.users[socket.id] != null){
             names.push(roomName)
         }

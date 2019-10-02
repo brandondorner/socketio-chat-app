@@ -33,8 +33,6 @@ if (messageForm != null){
         appendMessage(`You: ${message}`)
         //clears message form
         messageInput.value=''
-
-
 })
 }
 
