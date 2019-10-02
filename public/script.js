@@ -4,6 +4,7 @@ const socket = io('http://localhost:3000')
 const messageForm = document.getElementById('text-form')
 const messageInput = document.getElementById('message-input')
 const messageContainer = document.getElementById('message-container')
+const roomContainer = document.getElementById('room-container')
 
 //takes incoming message and creates a new div with message text
 const appendMessage = (message) => {
@@ -16,7 +17,7 @@ if (messageForm != null){
     //Get username and join lobby, send username to other users
     const name = prompt('What is your name?')
     appendMessage('You joined')
-    socket.emit('new-user', name)
+    socket.emit('new-user', roomName, name)
 
     //listening to form
     messageForm.addEventListener('submit', e => {
@@ -24,17 +25,28 @@ if (messageForm != null){
         //grabbing input value 
         const message = messageInput.value
         //send info from client to server
-        socket.emit('send-chat-message', message)
-        //clears message form
-        messageInput.value=''
+        socket.emit('send-chat-message', roomName, message)
         //adds the users message to his own chat
         appendMessage(`You: ${message}`)
+        //clears message form
+        messageInput.value=''
+
 
 })
 }
 
-socket.on('room-created', newRoom => {
-    
+//whenever new room is created, do this
+socket.on('room-created', room => {
+    //create new room element
+    const roomElement = document.createElement('div')
+    roomElement.innerText = room
+    //create the new room a tag with correct href
+    const roomLink = document.createElement('a')
+    roomLink.href = `/${room}`
+    roomLink.innerText = 'join'
+    //append the link and element to the homepage container
+    roomContainer.append(roomElement)
+    roomContainer.append(roomLink)
 })
 
 //whenever a message is sent, run this function
