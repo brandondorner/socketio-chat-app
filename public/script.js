@@ -15,7 +15,10 @@ const appendMessage = (message) => {
 
 if (messageForm != null){
     //Get username and join lobby, send username to other users
-    const name = prompt('What is your name?')
+    let name = prompt('What is your name?')
+    if (name == ''){
+        name = 'Anonymous'
+    }
     appendMessage('You joined')
     socket.emit('new-user', roomName, name)
 
