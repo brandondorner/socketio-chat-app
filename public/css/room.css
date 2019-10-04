@@ -20,6 +20,7 @@ body .main-container div {
   width: 100%;
   margin: 5px 0px;
   padding: 2px;
+  font-size: 20px;
 }
 
 body .main-container div div:nth-child(even) {
