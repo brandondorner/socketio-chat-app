@@ -1,4 +1,6 @@
 //creating express server that can communicate with socket.io
+//look for port that heroku gives us and if there is none listen on port 3000
+const PORT = process.env.PORT || 3000
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
@@ -47,7 +49,7 @@ app.get('/:room', (req, res) => {
     res.render('room', { roomName: req.params.room})//
 })
 
-server.listen(3000)
+server.listen(PORT)
 
 //Whenever user loads site, do this 
 io.on('connection', socket => {
