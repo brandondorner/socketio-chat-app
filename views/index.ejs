@@ -11,8 +11,8 @@
 </head>
 <body>
     <h1>Live Chat App</h1>
-    <h4>Create or join a room and chat with friends!</h4>
     <div class="chatroom-box">
+        <h4>Create or join a room and chat with friends!</h4>
         <div id="room-container">
             <!-- For each room of rooms (server.js), render a div w/ a tag -->
             <% Object.keys(rooms).forEach(room => { %>
@@ -25,6 +25,6 @@
             <input name="room" type="text" required>
             <button type="submit">New Room</button>
         </form> 
-    </div>     
+    </div>      
 </body>
 </html>
