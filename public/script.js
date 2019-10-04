@@ -1,5 +1,5 @@
 //Where our server is located
-const socket = io('http://localhost:3000')
+const socket = io()
 //setting variables
 const messageForm = document.getElementById('text-form')
 const messageInput = document.getElementById('message-input')
