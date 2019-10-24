@@ -1,4 +1,3 @@
-//creating express server that can communicate with socket.io
 //look for port that heroku gives us and if there is none listen on port 3000
 const PORT = process.env.PORT || 3000
 const express = require('express')
@@ -19,7 +18,7 @@ app.use(express.urlencoded({ extended: true}))
 const rooms = { } 
 
 //routes
-//at route index, render inex file as well as rooms
+//at route index, render index file and pass down rooms
 app.get('/', (req, res) => {
     res.render('index', { rooms : rooms})
 })
@@ -29,7 +28,7 @@ app.post('/room', (req, res) => {
     if (rooms[req.body.room] != null){
         return res.redirect('/')
     }
-    //adds newRoom, from script.js, to rooms object
+    //adds room, from script.js, to rooms object
     //add an empty list of users to the newly created room key. 
     //then redirect to page
     rooms[req.body.room] = {users: {}} //
