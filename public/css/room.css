@@ -53,10 +53,6 @@ body .main-container #message-container {
   padding: 5px;
 }
 
-body .main-container #message-container div {
-  border-bottom: 1px dotted #B3A9A9;
-}
-
 body .main-container form {
   padding: 5px;
   -webkit-box-pack: end;

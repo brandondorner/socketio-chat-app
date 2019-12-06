@@ -10,8 +10,8 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Live Chat App</h1>
     <div class="chatroom-box">
+        <h1>Live Chat App</h1>
         <h4>Create or join a room and chat with friends!</h4>
         <div id="room-container">
             <!-- For each room of rooms (server.js), render a div w/ a tag -->
@@ -22,9 +22,11 @@
         </div>
         <!-- New room form, submits data to webpage/room -->
         <form action="/room" method="POST">
-            <input name="room" type="text" required>
-            <button type="submit">New Room</button>
-        </form> 
+            <div class="new-room-form">
+                <input name="room" type="text" required>
+                <button type="submit">New Room</button>
+            </div>
+        </form>  
     </div>      
 </body>
 </html>
